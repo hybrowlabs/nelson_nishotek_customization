@@ -251,3 +251,11 @@ doctype_js = {
 
 
 app_include_js = "nilsan_custom/js/sales_order.js"
+
+
+
+doc_events = {
+    "Project": {
+        "after_insert": "nilsan_custom.override.project.create_warehouse_for_main_project"
+    }
+}
