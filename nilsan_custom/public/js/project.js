@@ -26,4 +26,55 @@ frappe.ui.form.on('Project', {
             create_new_doc("Task", "project");
         }, __("Create"));
     },
+
+    status: function (frm) {
+        if (frm.doc.status === 'On Hold') {
+            if (!frm.doc.custom_on_hold_from || !frm.doc.custom_on_hold_to) {
+                frappe.prompt([
+                    {
+                        fieldname: 'from_date',
+                        label: 'On Hold From',
+                        fieldtype: 'Date',
+                        reqd: 1
+                    },
+                    {
+                        fieldname: 'to_date',
+                        label: 'On Hold To',
+                        fieldtype: 'Date',
+                        reqd: 1
+                    }
+                ],
+                function (values) {
+                    frm.set_value('custom_on_hold_from', values.from_date);
+                    frm.set_value('custom_on_hold_to', values.to_date);
+                    frm.set_value('status', 'On Hold'); // Ensure status stays "On Hold"
+                    frm.refresh_field('custom_on_hold_from');
+                    frm.refresh_field('custom_on_hold_to');
+                    frm.refresh_field('status');
+                },
+                'Enter On Hold Dates',
+                'Set');
+            }
+        } else {
+            // If status is changed to anything other than 'On Hold', remove the dates
+            frm.set_value('custom_on_hold_from', '');
+            frm.set_value('custom_on_hold_to', '');
+            frm.refresh_field('custom_on_hold_from');
+            frm.refresh_field('custom_on_hold_to');
+        }
+    },
+
+    before_save: function (frm) {
+        // Prevent status from changing if it's on hold
+        if (frm.doc.custom_on_hold_from && frm.doc.custom_on_hold_to) {
+            frm.set_value('status', 'On Hold');
+        }
+    },
+
+    after_save: function (frm) {
+        // Ensure status remains "On Hold" after saving
+        if (frm.doc.custom_on_hold_from && frm.doc.custom_on_hold_to) {
+            frappe.db.set_value(frm.doctype, frm.doc.name, 'status', 'On Hold');
+        }
+    }
 });

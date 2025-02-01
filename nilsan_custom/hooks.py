@@ -259,3 +259,11 @@ doc_events = {
         "after_insert": "nilsan_custom.override.project.create_warehouse_for_main_project"
     }
 }
+
+
+
+
+override_doctype_class = {
+	"Project": "nilsan_custom.override.project.project_on_hold",
+}
+
