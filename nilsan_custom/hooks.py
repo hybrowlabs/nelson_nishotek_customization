@@ -267,3 +267,7 @@ override_doctype_class = {
 	"Project": "nilsan_custom.override.project.project_on_hold",
 }
 
+
+override_doctype_dashboards = {
+    "Quotation": "nilsan_custom.override.quotation_dashboard.get_dashboard_data",
+}

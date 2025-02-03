@@ -1,8 +1,33 @@
-frappe.ui.form.on('Quotation', {
+frappe.ui.form.on("Quotation", {
     refresh: function (frm) {
-        // Add custom options under the "Create" dropdown
-        frm.add_custom_button(__('Project'), function () {
-            frappe.new_doc("Project");
-        }, __("Create"));
+        // Check if a project already exists for this quotation
+        frappe.db.get_value("Project", {"custom_quotation": frm.doc.name}, "name")
+            .then(response => {
+                let project_exists = response.message.name ? true : false;
+
+                // Hide "Project" button if a project exists or if Quotation is Cancelled
+                if (!project_exists && frm.doc.status !== "Cancelled") {
+                    frm.add_custom_button(__('Project'), function () {
+                        frappe.route_options = {
+                            custom_quotation: frm.doc.name  // Pass Quotation name
+                        };
+                        frappe.new_doc("Project");  // Open new Project form
+                    }, __("Create"));
+                }
+            });
+
+        // Apply filter only when navigating from the "Reference" section
+        if (frappe.route_options && frappe.route_options.from_dashboard) {
+            frm.set_query("project", function () {
+                return {
+                    filters: {
+                        custom_quotation: frm.doc.name
+                    }
+                };
+            });
+
+            // Reset route options after applying the filter
+            delete frappe.route_options.from_dashboard;
+        }
     }
 });
