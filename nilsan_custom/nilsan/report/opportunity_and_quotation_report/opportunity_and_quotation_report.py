@@ -95,7 +95,7 @@ def get_data(filters, show_grand_total, show_status_wise, show_owner_wise):
     
     if show_owner_wise:
         owner_data = frappe.db.sql("""
-            SELECT DATE_FORMAT(o.creation, '%%M') AS month, o.custom_sales_person AS owner,
+            SELECT DATE_FORMAT(o.creation, '%M') AS month, o.custom_sales_person AS owner,
                    SUM(o.total) AS balance_enquiry,
                    COALESCE(SUM(q.base_total), 0) AS outgoing
             FROM `tabOpportunity` o
@@ -110,13 +110,13 @@ def get_data(filters, show_grand_total, show_status_wise, show_owner_wise):
         return sorted(owner_data, key=lambda x: month_order.index(x["month"]))
     
     opportunity_data = frappe.db.sql("""
-        SELECT DATE_FORMAT(creation, '%%M') AS month, SUM(total) AS balance_enquiry
+        SELECT DATE_FORMAT(creation, '%M') AS month, SUM(total) AS balance_enquiry
         FROM `tabOpportunity`
         GROUP BY month
     """, as_dict=True)
     
     quotation_data = frappe.db.sql("""
-        SELECT DATE_FORMAT(q.creation, '%%M') AS month, SUM(q.base_total) AS outgoing
+        SELECT DATE_FORMAT(q.creation, '%M') AS month, SUM(q.base_total) AS outgoing
         FROM `tabQuotation` q
         LEFT JOIN `tabOpportunity` o ON q.opportunity = o.name
         GROUP BY month
