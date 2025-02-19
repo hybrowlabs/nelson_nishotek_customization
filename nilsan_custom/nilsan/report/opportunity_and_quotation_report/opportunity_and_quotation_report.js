@@ -45,12 +45,12 @@ frappe.query_reports["Opportunity and Quotation Report"] = {
                 query_report.refresh();
             }
         },
-        {
-            "fieldname": "sales_person",
-            "label": __("Sales Person"),
-            "fieldtype": "Link",
-            "options": "Sales Person",
-            "hidden": 1 // Initially hidden, shown when checkbox is checked
-        }
+        // {
+        //     "fieldname": "sales_person",
+        //     "label": __("Sales Person"),
+        //     "fieldtype": "Link",
+        //     "options": "Sales Person",
+        //     "hidden": 1 // Initially hidden, shown when checkbox is checked
+        // }
     ]
 };
