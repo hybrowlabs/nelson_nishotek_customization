@@ -246,11 +246,12 @@ app_license = "mit"
 doctype_js = {
     "Project": "public/js/project.js",
     "Quotation": "public/js/quotation.js",
+    "Sales Order": "public/js/sales_order.js",
     }
 
 
 
-app_include_js = "nilsan_custom/js/sales_order.js"
+# app_include_js = "nilsan_custom/js/sales_order.js"
 
 
 
