@@ -200,17 +200,17 @@ def get_gl_entries(filters, accounting_dimensions):
 	)
 
 	# --- Fetch Remarks from Payment Entry ---
-	payment_entry_remark_map = frappe._dict(
-		frappe.get_all("Payment Entry", fields=["name", "remarks"], filters={"docstatus": 1}, as_list=1)
-	)
+	# payment_entry_remark_map = frappe._dict(
+	# 	frappe.get_all("Payment Entry", fields=["name", "remarks"], filters={"docstatus": 1}, as_list=1)
+	# )
 
 	# --- Map PO No and Remarks to GL Entries ---
 	for gle in gl_entries:
 		if gle.voucher_type == "Sales Invoice" and gle.voucher_no in sales_invoice_po_map:
 			gle["po_no"] = sales_invoice_po_map[gle.voucher_no]  # ✅ Fix: Check for Sales Invoice
 
-		if gle.voucher_type == "Payment Entry" and gle.voucher_no in payment_entry_remark_map:
-			gle["remark"] = payment_entry_remark_map[gle.voucher_no]
+		# if gle.voucher_type == "Payment Entry" and gle.voucher_no in payment_entry_remark_map:
+		# 	gle["remark"] = payment_entry_remark_map[gle.voucher_no]
 
 	# Convert currency if needed
 	if filters.get("presentation_currency"):
@@ -717,7 +717,6 @@ def get_columns(filters):
 			},
 			{"label": _("Supplier Invoice No"), "fieldname": "bill_no", "fieldtype": "Data", "width": 100},
 			{"label": _("Customer's Purchase Order"), "fieldname": "po_no", "fieldtype": "Data", "width": 150},  # New Field
-			{"label": _("Payment Entry Remark"), "fieldname": "remark", "fieldtype": "Data", "width": 200},  # New Field
 		]
 	)
 
