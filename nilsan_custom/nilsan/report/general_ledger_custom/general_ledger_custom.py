@@ -716,11 +716,14 @@ def get_columns(filters):
 				"width": 100,
 			},
 			{"label": _("Supplier Invoice No"), "fieldname": "bill_no", "fieldtype": "Data", "width": 100},
-			{"label": _("Customer's Purchase Order"), "fieldname": "po_no", "fieldtype": "Data", "width": 150},  # New Field
+			# {"label": _("Customer's Purchase Order"), "fieldname": "po_no", "fieldtype": "Data", "width": 150},  # New Field
 		]
 	)
 
 	if filters.get("show_remarks"):
 		columns.extend([{"label": _("Remarks"), "fieldname": "remarks", "width": 400}])
+	if filters.get("party_type") == "Customer":
+		columns.append({"label": _("Customer's Purchase Order"), "fieldname": "po_no", "fieldtype": "Data", "width": 150})
+
 
 	return columns

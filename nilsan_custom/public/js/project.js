@@ -10,17 +10,17 @@ frappe.ui.form.on('Project', {
         }
 
         // Add custom options under the "Create" dropdown
-        frm.add_custom_button(__('Material Request'), function () {
-            create_new_doc("Material Request", "custom_project");
-        }, __("Create"));
+        // frm.add_custom_button(__('Material Request'), function () {
+        //     create_new_doc("Material Request", "custom_project");
+        // }, __("Create"));
 
-        frm.add_custom_button(__('Sales Order'), function () {
-            create_new_doc("Sales Order", "project");
-        }, __("Create"));
+        // frm.add_custom_button(__('Sales Order'), function () {
+        //     create_new_doc("Sales Order", "project");
+        // }, __("Create"));
 
-        frm.add_custom_button(__('Production Plan'), function () {
-            create_new_doc("Production Plan", "project");
-        }, __("Create"));
+        // frm.add_custom_button(__('Production Plan'), function () {
+        //     create_new_doc("Production Plan", "project");
+        // }, __("Create"));
 
         frm.add_custom_button(__('Task'), function () {
             create_new_doc("Task", "project");

@@ -272,3 +272,9 @@ override_doctype_class = {
 override_doctype_dashboards = {
     "Quotation": "nilsan_custom.override.quotation_dashboard.get_dashboard_data",
 }
+
+
+# override_whitelisted_methods = {
+#     "erpnext.manufacturing.doctype.production_plan.production_plan.ProductionPlan.make_material_request": 
+#     "nilsan_custom.override.production_plan.custom_make_material_request"
+# }
