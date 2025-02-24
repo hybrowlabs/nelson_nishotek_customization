@@ -266,6 +266,7 @@ doc_events = {
 
 override_doctype_class = {
 	"Project": "nilsan_custom.override.project.project_on_hold",
+    "Production Plan" : "nilsan_custom.override.production_plan.custom_make_material_request"
 }
 
 
