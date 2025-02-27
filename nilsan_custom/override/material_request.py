@@ -34,7 +34,6 @@ def create_purchase_orders(material_request, items):
                 }]
             })
             po.insert()
-            po.submit()
             created.append({'name': po.name, 'supplier': po.supplier})
 
         return {'created': created, 'existing': existing}
