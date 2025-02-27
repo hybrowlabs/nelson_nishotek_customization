@@ -247,6 +247,7 @@ doctype_js = {
     "Project": "public/js/project.js",
     "Quotation": "public/js/quotation.js",
     "Sales Order": "public/js/sales_order.js",
+    "Material Request":"public/js/material_request.js"
     }
 
 
