@@ -9,7 +9,12 @@ frappe.ui.form.on("Quotation", {
                 if (!project_exists && frm.doc.status !== "Cancelled") {
                     frm.add_custom_button(__('Project'), function () {
                         frappe.route_options = {
-                            custom_quotation: frm.doc.name  // Pass Quotation name
+                            custom_quotation: frm.doc.name,  // Pass Quotation name
+                            custom_industry: frm.doc.custom_industry,
+                            custom_product_type: frm.doc.custom_product_type,
+                            custom_product_segment: frm.doc.custom_product_segment,
+                            custom_sub_industry: frm.doc.custom_sub_industry
+                            
                         };
                         frappe.new_doc("Project");  // Open new Project form
                     }, __("Create"));
